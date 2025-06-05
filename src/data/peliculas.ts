@@ -55,5 +55,12 @@ export const peliculas: Pelicula[] = [
     categoria: "Fantasía",
     duracion: "1h 56min",
     imagen: "https://image.tmdb.org/t/p/w500/rtosxP5sXuoRFPH4sVbMccLIPiV.jpg"
-  }
+  },
+  {
+  id: "8",
+  titulo: "Civil War",
+  categoria: "Drama / Acción",
+  duracion: "1h 49min",
+  imagen: "https://image.tmdb.org/t/p/w500/yBcxCPVYcD3FfzZ2dHQDebPYUu9.jpg"
+}
 ];
