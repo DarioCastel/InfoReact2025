@@ -1,9 +1,9 @@
-
 import styled from 'styled-components';
 import type { Pelicula } from '../data/peliculas';
 
 type Props = {
   pelicula: Pelicula;
+  onClick: () => void;
 };
 
 const Card = styled.div`
@@ -46,7 +46,7 @@ const Button = styled.button`
   font-weight: bold;
 `;
 
-const MovieCard = ({ pelicula }: Props) => {
+const MovieCard = ({ pelicula, onClick }: Props) => {
   return (
     <Card>
       <Image src={pelicula.imagen} alt={pelicula.titulo} />
@@ -54,7 +54,7 @@ const MovieCard = ({ pelicula }: Props) => {
         <h3>{pelicula.titulo}</h3>
         <p>{pelicula.categoria} • {pelicula.duracion}</p>
         <Spacer />
-        <Button>▶ Ver</Button>
+        <Button onClick={onClick}>▶ Ver</Button>
       </Content>
     </Card>
   );
