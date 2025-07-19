@@ -53,7 +53,7 @@ const Home = () => {
 
   return (
     <Container>
-      <Title>🎬 Proyecto PelisINFO entrega 3</Title>
+      <Title>🎬 Proyecto PelisINFO entrega 3!!</Title>
       <Input
         type="text"
         placeholder="Buscar por título..."
