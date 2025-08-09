@@ -1,10 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { peliculas } from "../data/peliculas";
+import { useMovies } from "../hooks/useMovies";
 import MovieCard from "../components/MovieCard";
 import { useNavigate } from "react-router-dom";
-
-const categorias = ["Todas", ...new Set(peliculas.map((p) => p.categoria))];
 
 const Container = styled.div`
   text-align: center;
@@ -28,13 +26,6 @@ const Input = styled.input`
   text-align: center;
 `;
 
-const Select = styled.select`
-  padding: 0.5rem;
-  border-radius: 8px;
-  margin-left: 1rem;
-  font-size: 1rem;
-`;
-
 const Grid = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -43,28 +34,26 @@ const Grid = styled.div`
 
 const Home = () => {
   const [busqueda, setBusqueda] = useState("");
-  const [categoria, setCategoria] = useState("Todas");
   const navigate = useNavigate();
 
+  const { data: peliculas = [], isLoading, error } = useMovies();
+
+  if (isLoading) return <Container><p>Cargando películas...</p></Container>;
+  if (error) return <Container><p>Error al cargar las películas</p></Container>;
+
   const filtradas = peliculas.filter((p) =>
-    (categoria === "Todas" || p.categoria === categoria) &&
     p.titulo.toLowerCase().includes(busqueda.toLowerCase())
   );
 
   return (
     <Container>
-      <Title>🎬 Proyecto PelisINFO entrega 3!!</Title>
+      <Title>🎬 Proyecto PelisINFO entrega 4!!</Title>
       <Input
         type="text"
         placeholder="Buscar por título..."
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
       />
-      <Select value={categoria} onChange={(e) => setCategoria(e.target.value)}>
-        {categorias.map((c) => (
-          <option key={c}>{c}</option>
-        ))}
-      </Select>
 
       <Grid>
         {filtradas.map((p) => (
@@ -76,6 +65,27 @@ const Home = () => {
           />
         ))}
       </Grid>
+
+      <div style={{ marginTop: "2rem", textAlign: "center" }}>
+        <button
+          onClick={() => navigate("/crear-pelicula")}
+          style={{
+            backgroundColor: "#778FF1",
+            color: "#111",
+            padding: "0.75rem 1.5rem",
+            borderRadius: "8px",
+            fontWeight: "bold",
+            border: "none",
+            cursor: "pointer",
+            boxShadow: "0 0 10px rgba(119,143,241,0.7)",
+            transition: "background-color 0.3s ease",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#5f76d6")}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#778FF1")}
+        >
+          + Crear nueva película
+        </button>
+      </div>
     </Container>
   );
 };

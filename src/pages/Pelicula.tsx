@@ -1,11 +1,48 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { peliculas } from "../data/peliculas";
+import { useMovie } from "../hooks/useMovies";
 
 const Pelicula = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const pelicula = peliculas.find((p) => p.id === id);
+  const { data: pelicula, isLoading, error } = useMovie(Number(id));
+
+  if (isLoading) {
+    return (
+      <div style={{
+        padding: "2rem",
+        color: "#fff",
+        background: "#111",
+        minHeight: "100vh",
+        textAlign: "center",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+      }}>
+        <p>Cargando película...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div style={{
+        padding: "2rem",
+        color: "#fff",
+        background: "#111",
+        minHeight: "100vh",
+        textAlign: "center",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+      }}>
+        <p>Error al cargar la película.</p>
+        <Link to="/" style={{ color: "#778FF1", textDecoration: "underline", marginTop: 20 }}>Volver al inicio</Link>
+      </div>
+    );
+  }
 
   if (!pelicula) {
     return (
