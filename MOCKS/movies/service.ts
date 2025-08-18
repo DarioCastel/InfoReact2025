@@ -1,12 +1,13 @@
-import { moviesDB, Movie } from "./db";
+import { moviesDB } from "./db";
+import type { Pelicula } from './db';
 
-export function getMovies(): Promise<Movie[]> {
+export function getMovies(): Promise<Pelicula[]> {
   return new Promise((resolve) => {
     setTimeout(() => resolve([...moviesDB]), 500);
   });
 }
 
-export function getMovieById(id: number): Promise<Movie> {
+export function getMovieById(id: number): Promise<Pelicula> {
   return new Promise((resolve, reject) => {
     const movie = moviesDB.find((m) => m.id === id);
     setTimeout(() => {
@@ -16,7 +17,7 @@ export function getMovieById(id: number): Promise<Movie> {
   });
 }
 
-export function createMovie(data: Omit<Movie, "id">): Promise<Movie> {
+export function createMovie(data: Omit<Pelicula, "id">): Promise<Pelicula> {
   return new Promise((resolve) => {
     const id = moviesDB.length + 1;
     const newMovie = { id, ...data };
