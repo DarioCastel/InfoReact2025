@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { useCreateMovie } from "../hooks/useMovies";
 import { useNavigate } from "react-router-dom";
-import type { UseMutationResult } from "@tanstack/react-query";
-import type { Pelicula } from "../../MOCKS/movies/db";
 
 const CrearPelicula = () => {
   const navigate = useNavigate();
 
-  const mutation: UseMutationResult<Pelicula, Error, Omit<Pelicula, "id">> = useCreateMovie();
 
   const { mutate, isLoading, isError, error, isSuccess } = useCreateMovie() as any;
 
