@@ -5,6 +5,7 @@ import Pelicula from "./pages/Pelicula";
 import PeliPlay from "./pages/PeliPlay";
 import NotFound from "./pages/Notfound"; 
 import Favoritos from "./pages/Favoritos";
+import CrearPelicula from "./pages/CrearPelicula";
 
 const App = () => {
   return (
@@ -19,6 +20,8 @@ const App = () => {
         <Route path="/pelicula/:id/play" element={<PeliPlay />} />
 
         <Route path="/favoritos" element={<Favoritos />} />
+
+        <Route path="/crear-pelicula" element={<CrearPelicula />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

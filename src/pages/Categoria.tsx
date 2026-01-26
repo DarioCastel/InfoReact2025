@@ -1,11 +1,13 @@
-import { useParams, Link } from "react-router-dom";
-import { peliculas } from "../data/peliculas";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { moviesDB } from "../../MOCKS/movies/db";
+import type { Pelicula } from "../../MOCKS/movies/db";
 import MovieCard from "../components/MovieCard";
 
 const Categoria = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
-  const peliculasFiltradas = peliculas.filter(
+  const peliculasFiltradas = moviesDB.filter(
     (p) => p.categoria.toLowerCase() === id?.toLowerCase()
   );
 
@@ -16,8 +18,13 @@ const Categoria = () => {
 
       {peliculasFiltradas.length > 0 ? (
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "1rem" }}>
-          {peliculasFiltradas.map((p) => (
-            <MovieCard key={p.id} pelicula={p} />
+          {peliculasFiltradas.map((p: Pelicula) => (
+            <MovieCard 
+              key={p.id} 
+              pelicula={p} 
+              onPlayClick={() => navigate(`/pelicula/${p.id}/play`)}
+              onImageClick={() => navigate(`/pelicula/${p.id}`)}
+            />
           ))}
         </div>
       ) : (

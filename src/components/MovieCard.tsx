@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import type { Pelicula } from '../data/peliculas';
+import type { Pelicula } from "../../MOCKS/movies/db";
 
 type Props = {
   pelicula: Pelicula;
